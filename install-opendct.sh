@@ -14,7 +14,7 @@ fi
 #set up some permissions
 
 chown -Rv sagetv:sagetv /opt/opendct
-chown -Rv nobody:users /etc/opendct
+chown -Rv 99:sagetv /etc/opendct
 chown -v root:sagetv /var/run
 chown -v root:sagetv /var/run
 chmod 775 /var/run/
