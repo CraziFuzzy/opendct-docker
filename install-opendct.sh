@@ -12,11 +12,13 @@ then
 fi
 
 #set up some permissions
+
 chown -Rv sagetv:sagetv /opt/opendct
 chown -v root:sagetv /var/run
 chown -v root:sagetv /var/run
 chmod 775 /var/run/
 chmod 775 /run/
 
+mkdir /var/run/opendct
 /opt/opendct/console-only
 
