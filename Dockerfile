@@ -12,9 +12,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # add sagetv user and group
 RUN useradd -u 911 -U -d /opt/opendct -s /bin/bash -G video sagetv
 
-# Speed up APT
-#RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
-#  && echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
+ Speed up APT
+RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
+  && echo "Acquire::http {No-Cache=True;};" > /etc/apt/apt.conf.d/no-cache
 
 RUN set -x \
   && apt-get update \
