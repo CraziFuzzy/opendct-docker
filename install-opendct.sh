@@ -13,12 +13,13 @@ fi
 
 #set up some permissions
 
-chown -Rv sagetv:sagetv /opt/opendct
-chown -v root:sagetv /var/run
-chown -v root:sagetv /var/run
-chmod 775 /var/run/
-chmod 775 /run/
+#chown -Rv sagetv:sagetv /opt/opendct
+#chown -Rv nobocy:sagetv /etc/opendct
+#chown -v root:sagetv /var/run
+#chown -v root:sagetv /var/run
+#chmod 775 /var/run/
+#chmod 775 /run/
 
-mkdir /var/run/opendct
+#mkdir /var/run/opendct
 /opt/opendct/console-only
 

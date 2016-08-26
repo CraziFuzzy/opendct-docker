@@ -10,7 +10,7 @@ ENV APP_NAME="OpenDCT Network Encoder"
 ENV DEBIAN_FRONTEND=noninteractive
 
 # add sagetv user and group
-RUN useradd -u 911 -U -d /opt/opendct -s /bin/bash -G video sagetv
+#RUN useradd -u 911 -U -d /opt/opendct -s /bin/bash -G video sagetv
 
 # Speed up APT
 RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
@@ -20,13 +20,10 @@ RUN set -x \
   && apt-get update \
   && apt-get install -y wget default-jre-headless
 
-ADD install-opendct.sh /usr/bin/
-RUN chmod 755 /usr/bin/install-opendct.sh
-
 VOLUME ["/etc/opendct"]
 VOLUME ["/opt/opendct"]
 
-# Network Encoder and Discovery
-EXPOSE 9000 8271
+ADD install-opendct.sh /usr/bin/
+RUN chmod 755 /usr/bin/install-opendct.sh
 
 CMD install-opendct.sh
