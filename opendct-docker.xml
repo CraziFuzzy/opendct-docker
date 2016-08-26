@@ -21,7 +21,7 @@
     <Data>
         <Volume>
             <HostDir>/mnt/user/apps/opendct/opt</HostDir>
-            <ContainerDir>/opt/opendcttv</ContainerDir>
+            <ContainerDir>/opt/opendct</ContainerDir>
             <Mode>rw</Mode>
         </Volume>
         <Volume>

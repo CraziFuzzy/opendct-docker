@@ -24,6 +24,7 @@ ADD install-opendct.sh /usr/bin/
 RUN chmod 755 /usr/bin/install-opendct.sh
 
 VOLUME ["/etc/opendct"]
+VOLUME ["/opt/opendct"]
 
 # Network Encoder and Discovery
 EXPOSE 9000 8271
