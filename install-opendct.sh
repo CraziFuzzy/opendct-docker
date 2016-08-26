@@ -8,7 +8,8 @@ then
 	rm opendct_0.5.8-1_amd64.deb
 	echo "OpenDCT Install Complete"
 
-	echo consumer.dynamic.default=opendct.consumer.MediaServerConsumerImpl >> /etc/opendct/etc/opendct.properties
+	# Set to use media server consumer, so we don't have to have access to recording location.
+	echo "consumer.dynamic.default=opendct.consumer.MediaServerConsumerImpl" >> /etc/opendct/etc/opendct.properties
 fi
 
 #set up some permissions
