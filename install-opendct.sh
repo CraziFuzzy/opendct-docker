@@ -11,5 +11,12 @@ then
 	echo consumer.dynamic.default=opendct.consumer.MediaServerConsumerImpl >> /etc/opendct/etc/opendct.properties
 fi
 
+#set up some permissions
+chown -Rv sagetv:sagetv /opt/opendct
+chown -v root:sagetv /var/run
+chown -v root:sagetv /var/run
+chmod 775 /var/run/
+chmod 775 /run/
+
 /opt/opendct/console-only
 
