@@ -16,16 +16,26 @@ fi
 
 chown -Rv sagetv:sagetv /opt/opendct
 chown -Rv 99:sagetv /etc/opendct
+chown -Rv sagetv:sagetv /var/log/opendct
 chown -v root:sagetv /var/run
 chown -v root:sagetv /var/run
 chmod 775 /var/run/
 chmod 775 /run/
 
-mkdir /var/run/opendct
 # /opt/opendct/console-only
 
-systemctl enable opendct.service
-systemctl start opendct.service
+if test ! -e /var/log/opendct; then
+	mkdir -p /var/log/opendct
+fi
 
-tail -f /var/log/opendct/opendct.log
+if test ! -e /var/run/opendct; then
+	mkdir -p /var/run/opendct
+fi
 
+chown opendct:opendct /var/log/opendct
+chown opendct:opendct /var/run/opendct
+
+cd /opt/opendct/jsw/bin
+./sh.script.in "start"
+
+tail -q -F --retry /var/log/opendct/opendct.log
