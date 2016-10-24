@@ -9,7 +9,7 @@ then
 	echo "OpenDCT Install Complete"
 
 	# Set to use media server consumer, so we don't have to have access to recording location.
-	echo "consumer.dynamic.default=opendct.consumer.MediaServerConsumerImpl" >> /etc/opendct/conf/opendct.properties
+	echo -e "\nconsumer.dynamic.default=opendct.consumer.MediaServerConsumerImpl\n" >> /etc/opendct/conf/opendct.properties
 fi
 
 #set up some permissions
