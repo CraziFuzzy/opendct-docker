@@ -22,5 +22,10 @@ chmod 775 /var/run/
 chmod 775 /run/
 
 mkdir /var/run/opendct
-/opt/opendct/console-only
+# /opt/opendct/console-only
+
+systemctl enable opendct.service
+systemctl start opendct.service
+
+tail -f /var/log/opendct/opendct.log
 
