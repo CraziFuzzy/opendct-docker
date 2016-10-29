@@ -20,11 +20,6 @@
     </Networking>
     <Data>
         <Volume>
-            <HostDir>/mnt/user/appdata/opendct/opt</HostDir>
-            <ContainerDir>/opt/opendct</ContainerDir>
-            <Mode>rw</Mode>
-        </Volume>
-        <Volume>
             <HostDir>/mnt/user/appdata/opendct/etc</HostDir>
             <ContainerDir>/etc/opendct</ContainerDir>
             <Mode>rw</Mode>
