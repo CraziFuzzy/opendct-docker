@@ -32,7 +32,7 @@
         </Volume>
         <Volume>
             <HostDir>/mnt/user/appdata/opendct/opt</HostDir>
-            <ContainerDir>/etc/opendct</ContainerDir>
+            <ContainerDir>/opt/opendct</ContainerDir>
             <Mode>rw</Mode>
         </Volume>
     </Data>
