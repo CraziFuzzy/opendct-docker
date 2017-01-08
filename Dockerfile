@@ -18,7 +18,7 @@ RUN echo "force-unsafe-io" > /etc/dpkg/dpkg.cfg.d/02apt-speedup \
 
 RUN set -x \
   && apt-get update \
-  && apt-get install -y wget default-jre-headless
+  && apt-get install -y curl wget default-jre-headless
 
 RUN apt-get install -y supervisor
 
