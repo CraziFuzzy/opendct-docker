@@ -20,20 +20,14 @@ RUN set -x \
   && apt-get update \
   && apt-get install -y curl wget default-jre-headless
 
-RUN apt-get install -y supervisor
-
 VOLUME ["/etc/opendct"]
 VOLUME ["/var/log/opendct"]
+VOLUME ["/opt/opendct"]
 
 ADD install-opendct.sh /usr/bin/
-ADD prep-opendct.sh /usr/bin/
+ADD launch-opendct.sh /usr/bin/
 RUN chmod 755 /usr/bin/install-opendct.sh
-RUN chmod 755 /usr/bin/prep-opendct.sh
+RUN chmod 755 /usr/bin/launch-opendct.sh
 
-# Install opendct
-RUN install-opendct.sh
-
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# launch supervisord which will launch opendct
-ENTRYPOINT ["/usr/bin/supervisord"]
+# launch script which will install and start opendct
+ENTRYPOINT ["/usr/bin/launch-opendct.sh"]
