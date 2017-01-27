@@ -36,6 +36,13 @@
             <Mode>rw</Mode>
         </Volume>
     </Data>
+    <Environment>
+        <Variable>
+            <Value>latest</Value>
+            <Name>VERSION</Name>
+            <Mode/>
+        </Variable>
+    </Environment>	
     <WebUI>http://[IP]:[PORT:8080]/</WebUI>
     <Banner>https://raw.githubusercontent.com/OpenSageTV/sagetv-miniclient/master/playstore/ic_launcher-web.png</Banner>
     <Icon>https://raw.githubusercontent.com/OpenSageTV/sagetv-miniclient/master/playstore/ic_launcher-web.png</Icon>
