@@ -25,9 +25,7 @@ VOLUME ["/var/log/opendct"]
 VOLUME ["/opt/opendct"]
 
 ADD install-opendct.sh /usr/bin/
-ADD launch-opendct.sh /usr/bin/
 RUN chmod 755 /usr/bin/install-opendct.sh
-RUN chmod 755 /usr/bin/launch-opendct.sh
 
 # launch script which will install and start opendct
-ENTRYPOINT ["/usr/bin/launch-opendct.sh"]
+CMD ["/usr/bin/install-opendct.sh"]

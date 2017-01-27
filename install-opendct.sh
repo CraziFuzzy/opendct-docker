@@ -20,4 +20,18 @@ wget -O ${OPENDCT_DEB} ${OPENDCT_URL}
 dpkg -i ${OPENDCT_DEB}
 rm -f ${OPENDCT_DEB}
 
-echo "OpenDCT Install Complete"
+# Set up some permissions
+chown -Rv sagetv:sagetv /opt/opendct
+chown -Rv 99:sagetv /etc/opendct
+chown -Rv 99:sagetv /var/log/opendct
+chown -v root:sagetv /var/run
+chmod 775 /var/run/
+chmod 775 /run/
+
+echo "OpenDCT Install Complete :-)"
+
+# Set to use media server consumer, so we don't have to have access to recording location.
+echo -e "\nconsumer.dynamic.default=opendct.consumer.MediaServerConsumerImpl\n" >> /etc/opendct/conf/opendct.properties
+
+echo "Launching OpenDCT"
+/opt/opendct/console-only
