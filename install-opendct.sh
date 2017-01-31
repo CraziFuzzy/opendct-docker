@@ -22,7 +22,7 @@ fi
 echo "Installing OpenDCT ${OPENDCT_VERSION}..."
 
 wget -O ${OPENDCT_DEB} ${OPENDCT_URL}
-dpkg -i ${OPENDCT_DEB}
+dpkg -i --force-confold ${OPENDCT_DEB}
 rm -f ${OPENDCT_DEB}
 
 # Set up some permissions
