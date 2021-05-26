@@ -1,25 +1,52 @@
 #!/usr/bin/env bash
-
 VERSION=${VERSION:-latest}
 
 # OpenDCT Version
-OPENDCT_VERSION=""
+GITHUB_REPO="enternoescape/opendct"
+OPENDCT_URL="null"
 if [ "${VERSION}" = "latest" ] ; then
-    OPENDCT_VERSION=`curl -L https://github.com/enternoescape/opendct/releases/latest | egrep -o '\/opendct\/releases\/download\/[0-9]*\.[0-9]*\.[0-9]*' | tail -1 | sed 's/^.*[^0-9]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/'`
-    OPENDCT_URL=https://github.com/enternoescape/opendct/releases/download/${OPENDCT_VERSION}-Stable/opendct_${OPENDCT_VERSION}-1_amd64.deb
-    OPENDCT_DEB=opendct_${OPENDCT_VERSION}-1_amd64.deb
+    echo "Finding latest stable version..."
+    OPENDCT_URL=`curl -s https://api.github.com/repos/${GITHUB_REPO}/releases | \
+  jq -r '[[.[] |
+    select(.draft != true) |
+    select(.prerelease != true)][0] |
+    .assets |
+    .[] |
+    select(.name | endswith(".deb")) |
+    .browser_download_url][0]'`
+
 elif [ "${VERSION}" = "beta" ] ; then
-    OPENDCT_VERSION=`curl -L https://bintray.com/opendct/Beta/OpenDCT/_latestVersion | egrep -o '\/opendct\/Beta\/OpenDCT\/[0-9]*\.[0-9]*\.[0-9]*' | tail -1 | sed 's/^.*[^0-9]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/'`
-    OPENDCT_URL=https://dl.bintray.com/opendct/Beta/releases/${OPENDCT_VERSION}/opendct_${OPENDCT_VERSION}-1_amd64.deb
-    OPENDCT_DEB=opendct_${OPENDCT_VERSION}-1_amd64.deb
+    echo "Finding latest version (including beta)..."
+    OPENDCT_URL=`curl -s https://api.github.com/repos/${GITHUB_REPO}/releases | \
+  jq -r '[[.[] |
+    select(.draft != true)][0] |
+    .assets |
+    .[] |
+    select(.name | endswith(".deb")) |
+    .browser_download_url][0]'`
+
 else
-    OPENDCT_VERSION=${VERSION}
-    OPENDCT_URL=https://github.com/enternoescape/opendct/releases/download/${OPENDCT_VERSION}-Stable/opendct_${OPENDCT_VERSION}-1_amd64.deb
-    OPENDCT_DEB=opendct_${OPENDCT_VERSION}-1_amd64.deb
+    echo "Finding version ${VERSION}..."
+    OPENDCT_URL=`curl -s https://api.github.com/repos/${GITHUB_REPO}/releases | \
+  jq --arg ver "opendct_${VERSION}-1" -r '[[.[] |
+    select(.draft != true)][0] |
+    .assets |
+    .[] |
+    select(.name | endswith(".deb")) |
+    select(.name | contains($ver)) |
+    .browser_download_url][0]'`
+
 fi
 
 # install opendct
-echo "Installing OpenDCT ${OPENDCT_VERSION}..."
+if [ "${OPENDCT_URL}" = "null" ] ; then
+    echo "Unable to find suitable OpenDCT version on github repo ${GITHUB_REPO}"
+    exit 1
+fi
+
+echo "Installing OpenDCT from ${OPENDCT_URL}..."
+
+OPENDCT_DEB=opendct_amd64.deb
 
 wget -O ${OPENDCT_DEB} ${OPENDCT_URL}
 dpkg -i ${OPENDCT_DEB}
